@@ -1,27 +1,34 @@
 MyClub by SportCreative
 
-MyClub by SportCreative je kompletní digitální platforma pro sportovní kluby, která automatizuje správu zápasů, výsledků, soutěží a hráčských dat. Je to full-stack řešení, které kombinuje moderní technologie, AI a jednoduché uživatelské rozhraní, takže kluby mohou mít všechno na jednom místě, bez nutnosti složité administrace.
+# Vize MyClub (SportCreative)
 
-Klíčové funkce:
+## Úvod
+MyClub je moderní digitální platforma určená pro sportovní kluby všech velikostí, hráče, trenéry a fanoušky. Naším cílem je vytvořit prostředí, kde se sportovní komunita může efektivně propojit, sdílet své zážitky, rozvíjet své dovednosti a prezentovat své úspěchy.
 
-Automatické načítání výsledků a zápasů z oficiálních zdrojů (FAČR) – data se aktualizují každých 5–30 minut.
+## Hlavní výhody
+- **Komplexní správa klubu** - jednoduchá správa týmů, hráčů, zápasů a tabulek
+- **Obsahový management** - publikování článků, blogů, fotografií a videí
+- **Spolupráce se sponzory** - efektivní správa partnerství a bannerů
 
-Správa hráčů a soutěží – možnost ručního i automatického nahrávání dat.
+## Naše výhody
+- **Moderní technologie** - intuitivní rozhraní pro snadné používání
+- **Úspora času** - zjednodušení administrativy a každodenních úkonů
+- **Zaměření na rozvoj** - více času pro práci s hráči a budování komunity
 
-AI-powered obsah – generování článků a zápisů k zápasům.
+## Propojení tradice a inovace
+MyClub spojuje tradiční hodnoty sportu s digitální inovací:
+- Reálný přenos zápasů a výsledků
+- Okamžité novinky a aktuality
+- Interaktivní zapojení fanoušků
+- Transparentní komunikace uvnitř klubu
 
-Front-end + back-end – kompletní webové řešení s databází, e-mail hostingem a doménou.
+## Naše filozofie
+Věříme, že sport je více než jen soutěž - je to komunita, která:
+- **Inspiruje** k lepším výkonům
+- **Spojuje** lidi napříč generacemi
+- **Posouvá hranice** individuálních i týmových možností
 
-Integrace a propojení – možnost napojení na stávající web nebo úplně vlastní custom web.
-
-Self-hosting možnost – kluby mohou provozovat platformu na vlastním serveru a mít plnou kontrolu nad daty.
-
-Pro koho je určen?
-
-Malé i velké kluby, které chtějí moderní a automatizovanou platformu.
-
-Kluby hledající komplexní správu dat, článků, výsledků a hráčů.
-
-Kluby, které chtějí flexibilitu – od jednoduchého “plug-and-play” řešení po plně custom web a self-hosting.
+## Závěr
+MyClub je mostem mezi tradicí a moderní digitální zkušeností, který přináší hodnotu každému členovi sportovní komunity a pomáhá klubům růst a prosperovat v digitálním věku.
 
 MyClub by SportCreative šetří čas, zajišťuje aktuální informace a umožňuje profesionální prezentaci klubu bez složité administrace.

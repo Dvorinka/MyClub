@@ -1,9 +1,22 @@
-Preloz cely ten web, integruj obrazky z /assets2/*.png
-Pridej sekci s videem (video zatim zadne bude tam odkaz na ytb) nekde k vrchu neco v podobnem, integruj recenze zakazniku z home-page-16.html
-Hlavni soubor bude index.html
-Napojit a prejmenovat vsechny dalsi .html soubory a dat je do navigace
-Plan stranky @vize.md
-Musi to byt privetive pro uzivatele
-Cenik si tam dointegruju
+# Zadání webu MyClub
 
-Head nemusis resit to si doupravim, jen obsah, scripty taky nic, ciste html pripadne css ale to by nemuselo byt potreba
+Tento dokument specifikuje, co se má udělat na webu MyClub. Cílem je dodat čisté HTML šablony (případně lehké CSS), bez zásahů do `<head>` a bez JS skriptů, pokud to není nutné.
+
+## Cíl
+- **Převést a sjednotit** existující obsah do přehledného, uživatelsky přívětivého webu.
+- **Integrovat obrázky** z `assets2/*.png`.
+- **Přidat sekci s videem** (zatím odkaz/placeholder na YouTube) poblíž horní části homepage.
+- **Integrovat recenze zákazníků** podle vzoru z `home-page-16.html`.
+
+## Rozsah a omezení
+- Hlavní vstupní soubor: `index.html`.
+- Ostatní `.html` soubory: přejmenovat/normalizovat, propojit do navigace a mezi sebou.
+- **Neřešit `<head>`** (meta, fonty, externí knihovny si upravím později).
+- **Nešahat na JavaScriptu**, dodělám kdyžtak sám.
+- Ceník doplním později (ponechat místo/sekci jen přeloženou).
+
+## Dodatky
+- Rozvržení a styl bych nechal takový jaký je v indexu, nějak moc bych ho neměnil a spíš bych na něm stavěl
+- Kreativitu a vlastní vizobrazení nechám na vás
+- Oddělat blog, ten určitě dělat nebudu
+- O další informace a fotky mi kdyžtak napište, dodám
