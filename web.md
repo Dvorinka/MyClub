@@ -4,6 +4,6 @@ Hlavni soubor bude index.html
 Napojit a prejmenovat vsechny dalsi .html soubory a dat je do navigace
 Plan stranky @vize.md
 Musi to byt privetive pro uzivatele
-Cenik si tam dintegruju
+Cenik si tam dointegruju
 
 Head nemusis resit to si doupravim, jen obsah, scripty taky nic, ciste html pripadne css ale to by nemuselo byt potreba
