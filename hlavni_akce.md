@@ -3,3 +3,4 @@ we will be using only these pages, @zmeny.html@sluzby.html@reklamace.html@refere
 update the header and nav on all pages, @assets2 all images from here, and add more placeholder which i need to fill later.
 
 create full structure of the website based on the @vize.md, @pricing.md, @overview.md
+translate everything to czeck
