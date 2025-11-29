@@ -21,3 +21,5 @@ Tento dokument specifikuje, co se má udělat na webu MyClub. Cílem je dodat č
 - Oddělat blog, ten určitě dělat nebudu
 - O další informace a fotky mi kdyžtak napište, dodám
 do footeru copyright Jakub Fischer
+
+Inspirace: /web_insp/ (všechny soubory)
