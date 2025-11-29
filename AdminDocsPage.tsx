@@ -1,11 +1,14 @@
+"use client";
+
 import React, { useEffect, useMemo, useState } from 'react';
+import { IconType } from 'react-icons';
 import {
   Box,
   Heading,
   Text,
   List,
   ListItem,
-  Link,
+  Link as ChakraLink,
   Divider,
   Code,
   OrderedList,
@@ -26,7 +29,146 @@ import {
   AlertIcon,
   AlertTitle,
   AlertDescription,
+  LinkBox,
+  LinkOverlay,
+  useBreakpointValue,
+  Flex,
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Button,
+  Image,
+  Avatar,
+  AvatarGroup,
+  Tooltip,
+  Spinner,
+  Skeleton,
+  SkeletonCircle,
+  SkeletonText,
+  Progress,
+  Switch,
+  FormControl,
+  FormLabel,
+  FormHelperText,
+  Input,
+  Textarea,
+  Select,
+  Checkbox,
+  Radio,
+  RadioGroup,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
+  Slider,
+  SliderTrack,
+  SliderFilledTrack,
+  SliderThumb,
+  SliderMark,
+  RangeSlider,
+  RangeSliderTrack,
+  RangeSliderFilledTrack,
+  RangeSliderThumb,
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+  Tag,
+  TagLabel,
+  TagLeftIcon,
+  TagRightIcon,
+  TagCloseButton,
+  Wrap,
+  WrapItem,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
+  MenuDivider,
+  useColorMode,
+  useTheme,
+  useClipboard,
+  useDisclosure as useChakraDisclosure,
+  useToast as useChakraToast,
+  useColorModeValue as useChakraColorModeValue,
+  useBreakpointValue as useChakraBreakpointValue,
+  useMediaQuery,
+  useOutsideClick,
+  usePrefersReducedMotion,
+  useTheme as useChakraTheme,
+  useToken,
+  useUpdateEffect,
+  useControllableState,
+  useBoolean,
+  useCallbackRef,
+  useConst,
+  useDisclosure as useChakraDisclosure2,
+  useForceUpdate,
+  useId,
+  useInterval,
+  useLatestRef,
+  useMergeRefs,
+  useMultiStyleConfig,
+  usePrevious,
+  useSafeLayoutEffect,
+  useSize,
+  useStyleConfig,
+  useTimeout,
+  useToken as useChakraToken,
+  useUpdateEffect as useChakraUpdateEffect,
+  useWhyDidYouUpdate,
+  createIcon,
+  createStandaloneToast,
+  LightMode,
+  DarkMode,
+  CSSReset,
+  ColorModeProvider,
+  ColorModeScript,
+  GlobalStyle,
+  ThemeProvider,
+  extendTheme,
+  theme as baseTheme,
+  withDefaultColorScheme,
+  withDefaultProps,
+  withDefaultVariant,
+  withDefaultSize,
+  withDefaultStyle,
+  withDefaultVariant as withDefaultVariant2,
+  ChakraProvider,
+  cookieStorageManager,
+  cookieStorageManagerSSR,
+  createLocalStorageManager,
+  defaultSystemFonts,
+  getScriptSrc,
+  isChakraTheme,
+  localStorageManager,
+  omitThemingProps,
+  StylesProvider,
+  SystemStyleObject,
+  ThemingProps,
+  toCSSObject,
+  toCSSVar,
+  toVarDefinition,
+  toVarReference,
+  useChakra,
+  useStyleConfig as useChakraStyleConfig,
+  useTheme as useChakraTheme2,
+  useToken as useChakraToken2,
+  useMultiStyleConfig as useChakraMultiStyleConfig,
+  useStyleConfig as useChakraStyleConfig2,
+  forwardRef
 } from '@chakra-ui/react';
+// Next.js Link removed as we're not using Next.js
 import {
   FaLink,
   FaArrowUp,
@@ -69,8 +211,34 @@ import {
 } from 'react-icons/fa';
 import AdminLayout from '../../layouts/AdminLayout';
 
+interface Section {
+  id: string;
+  label: string;
+  icon: IconType;
+}
+
+// Custom Link component with proper TypeScript types
+const Link = forwardRef<HTMLAnchorElement, { href: string; children: React.ReactNode; [key: string]: any }>(({ href, children, ...props }, ref) => (
+  <ChakraLink 
+    ref={ref}
+    href={href} 
+    onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
+      e.preventDefault();
+      const targetId = href.replace('#', '');
+      const el = document.getElementById(targetId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+        window.history.pushState(null, '', href);
+      }
+    }}
+    {...props}
+  >
+    {children}
+  </ChakraLink>
+));
+
 const AdminDocsPage: React.FC = () => {
-  const sections = useMemo(
+  const sections = useMemo<Section[]>(
     () => [
       { id: 'uvod', label: 'Úvod a přehled', icon: FaLightbulb },
       { id: 'nastaveni', label: 'Nastavení klubu', icon: FaCog },
@@ -102,10 +270,16 @@ const AdminDocsPage: React.FC = () => {
     []
   );
 
-  const [activeId, setActiveId] = useState<string>('');
-  const toast = useToast();
+  const [activeId, setActiveId] = useState<string>('uvod');
+  const toast = useToast({
+    position: 'top-right',
+    duration: 3000,
+    isClosable: true,
+  });
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     const observer = new IntersectionObserver(
       (entries) => {
         const visible = entries
@@ -117,9 +291,17 @@ const AdminDocsPage: React.FC = () => {
       },
       { rootMargin: '-20% 0px -60% 0px', threshold: [0, 0.25, 0.5, 0.75, 1] }
     );
-    const els = sections.map((s) => document.getElementById(s.id)).filter(Boolean) as Element[];
-    els.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+    
+    const elements = sections
+      .map((s: Section) => document.getElementById(s.id))
+      .filter((element): element is HTMLElement => element !== null);
+      
+    elements.forEach((element) => observer.observe(element));
+    
+    return () => {
+      elements.forEach((element) => observer.unobserve(element));
+      observer.disconnect();
+    };
   }, [sections]);
 
   useEffect(() => {
@@ -131,38 +313,73 @@ const AdminDocsPage: React.FC = () => {
   }, [activeId]);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     const t = setTimeout(() => {
-      const hash = (window.location.hash || '').replace('#', '').trim();
-      let targetId = hash;
-      if (!targetId) {
-        try {
-          targetId = localStorage.getItem('adminDocs:lastAnchor') || '';
-        } catch {}
-      }
-      if (targetId) {
-        const el = document.getElementById(targetId);
-        if (el) {
-          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          setActiveId(targetId);
+      try {
+        const hash = (window.location.hash || '').replace('#', '').trim();
+        let targetId = hash;
+        
+        if (!targetId && typeof localStorage !== 'undefined') {
+          try {
+            targetId = localStorage.getItem('adminDocs:lastAnchor') || '';
+          } catch (error) {
+            console.warn('Failed to read from localStorage:', error);
+          }
         }
+        
+        if (targetId) {
+          const el = document.getElementById(targetId);
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            setActiveId(targetId);
+          }
+        }
+      } catch (error) {
+        console.error('Error in scroll effect:', error);
       }
     }, 50);
+    
     return () => clearTimeout(t);
   }, []);
 
-  const copyDeepLink = async (id: string) => {
+  const copyDeepLink = async (id: string, event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
     try {
+      if (typeof window === 'undefined') return;
+      
       const url = `${window.location.origin}${window.location.pathname}#${id}`;
-      await navigator.clipboard.writeText(url);
-      toast({
-        title: 'Odkaz zkopírován',
-        status: 'success',
-        duration: 1500,
-        isClosable: true,
-      });
-    } catch {
+      
+      if (navigator.clipboard) {
+        await navigator.clipboard.writeText(url);
+        toast({
+          title: 'Odkaz zkopírován',
+          status: 'success',
+          duration: 1500,
+          isClosable: true,
+        });
+      } else {
+        // Fallback for browsers that don't support the Clipboard API
+        const textArea = document.createElement('textarea');
+        textArea.value = url;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        
+        toast({
+          title: 'Odkaz zkopírován (pomocí fallbacku)',
+          status: 'success',
+          duration: 1500,
+          isClosable: true,
+        });
+      }
+    } catch (error) {
+      console.error('Failed to copy link:', error);
       toast({
         title: 'Nelze zkopírovat odkaz',
+        description: 'Zkuste to prosím znovu nebo použijte klávesovou zkratku Ctrl+C',
         status: 'error',
         duration: 2000,
         isClosable: true,
@@ -175,26 +392,48 @@ const AdminDocsPage: React.FC = () => {
   const bgCard = useColorModeValue('white', 'gray.800');
   const borderColor = useColorModeValue('gray.200', 'gray.700');
 
-  const SectionHeader = ({ id, icon, title }: { id: string; icon: any; title: string }) => (
-    <HStack align="center" justify="space-between" mb={4} id={id} scrollMarginTop="100px">
-      <HStack spacing={3}>
-        <Box p={2} bg={useColorModeValue('blue.50', 'blue.900')} borderRadius="lg">
-          <Icon as={icon} color={useColorModeValue('blue.600', 'blue.300')} boxSize={5} />
-        </Box>
-        <Heading size="lg" color={useColorModeValue('gray.800', 'white')}>
-          {title}
-        </Heading>
+  // Custom Link component that works without Next.js
+  const Link = forwardRef<HTMLAnchorElement, { href: string; children: React.ReactNode }>(({ href, children, ...props }, ref) => (
+    <ChakraLink 
+      ref={ref}
+      href={href} 
+      onClick={(e) => {
+        e.preventDefault();
+        const targetId = href.replace('#', '');
+        const el = document.getElementById(targetId);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+          window.history.pushState(null, '', href);
+        }
+      }}
+      {...props}
+    >
+      {children}
+    </ChakraLink>
+  ));
+
+  const SectionHeader: React.FC<{ id: string; icon: IconType; title: string }> = ({ id, icon, title }) => {
+    return (
+      <HStack align="center" justify="space-between" mb={4} id={id} scrollMarginTop="100px">
+        <HStack spacing={3}>
+          <Box p={2} bg={useColorModeValue('blue.50', 'blue.900')} borderRadius="lg">
+            <Icon as={icon} color={useColorModeValue('blue.600', 'blue.300')} boxSize={5} />
+          </Box>
+          <Heading size="lg" color={useColorModeValue('gray.800', 'white')}>
+            {title}
+          </Heading>
+        </HStack>
+        <IconButton
+          aria-label="Zkopírovat odkaz"
+          variant="ghost"
+          size="sm"
+          icon={<FaLink />}
+          onClick={(e) => copyDeepLink(id, e)}
+          borderRadius="full"
+        />
       </HStack>
-      <IconButton
-        aria-label="Zkopírovat odkaz"
-        variant="ghost"
-        size="sm"
-        icon={<FaLink />}
-        onClick={() => copyDeepLink(id)}
-        borderRadius="full"
-      />
-    </HStack>
-  );
+    );
+  };
 
   return (
     <AdminLayout>
@@ -216,8 +455,9 @@ const AdminDocsPage: React.FC = () => {
                 </HStack>
                 <VStack spacing={1.5} align="stretch">
                   {sections.map((s) => (
-                    <Link
+                    <ChakraLink
                       key={s.id}
+                      as={Link}
                       href={`#${s.id}`}
                       display="flex"
                       alignItems="center"
@@ -244,7 +484,7 @@ const AdminDocsPage: React.FC = () => {
                     >
                       <Icon as={s.icon} mr={2.5} boxSize={4} />
                       <Text flex={1}>{s.label}</Text>
-                    </Link>
+                    </ChakraLink>
                   ))}
                 </VStack>
               </Box>
@@ -290,9 +530,9 @@ const AdminDocsPage: React.FC = () => {
                     </AlertTitle>
                     <AlertDescription fontSize="sm">
                       <strong>Technická podpora:</strong> Máte-li jakékoli dotazy nebo narazíte na problém, napište nám na{' '}
-                      <Link href="mailto:help@tdvorak.dev" color="blue.600" fontWeight="bold">
+                      <ChakraLink href="mailto:help@tdvorak.dev" color="blue.600" fontWeight="bold">
                         help@tdvorak.dev
-                      </Link>
+                      </ChakraLink>
                       {' '}— odpovídáme do 24 hodin.
                       <br />
                       <strong>Vlastní úpravy:</strong> Hledáte specifické funkce nebo přizpůsobení webu vašim potřebám? 
@@ -347,10 +587,11 @@ const AdminDocsPage: React.FC = () => {
                       { icon: FaChartLine, title: 'Analytics', desc: 'Statistiky návštěvnosti', link: '/admin/analytika' },
                       { icon: FaSyncAlt, title: 'Prefetch', desc: 'Aktualizace dat z FAČR', link: '/admin/prefetch' },
                     ].map((item, idx) => (
-                      <Link
+                      <ChakraLink
                         key={idx}
                         href={item.link}
                         _hover={{ textDecoration: 'none' }}
+                        as={Link}
                       >
                         <HStack
                           p={4}

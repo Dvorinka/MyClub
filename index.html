@@ -116,6 +116,7 @@ Support Dropdown Menu
   >
     <div class="flex w-full relative">
       <div class="flex flex-1 px-8 py-8">
+        <!-- Clean Support Menu (MyClub) -->
         <ul class="space-y-5 w-full">
           <li>
             <a
@@ -154,26 +155,50 @@ Support Dropdown Menu
               href="./faq-page.html"
               class="text-secondary/60 dark:text-accent/60 dark:hover:text-accent flex items-center gap-1 group/item font-normal text-tagline-1 hover:text-secondary transition-all duration-200"
             >
-              <span>05. Analytics &amp; Reporting</span>
-              <span
-                class="group-hover/item:translate-x-2 group-hover/item:opacity-100 opacity-0 transition-all duration-200"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                >
-                  <path
-                    d="M8 12L12 8L8 4"
-                    class="stroke-secondary dark:stroke-accent"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  ></path>
-                </svg>
-              </span>
+              <span>FAQ</span>
+            </a>
+          </li>
+        </ul>
+        <!-- Hide original long list -->
+        <ul class="space-y-5 w-full hidden">
+          <li>
+            <a
+              href="./reference.html"
+              class="text-secondary/60 dark:text-accent/60 dark:hover:text-accent flex items-center gap-1 group/item font-normal text-tagline-1 hover:text-secondary transition-all duration-200"
+            >
+              <span>Reference</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="./dokumentace.html"
+              class="text-secondary/60 dark:text-accent/60 dark:hover:text-accent flex items-center gap-1 group/item font-normal text-tagline-1 hover:text-secondary transition-all duration-200"
+            >
+              <span>Dokumentace</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="./podpora.html"
+              class="text-secondary/60 dark:text-accent/60 dark:hover:text-accent flex items-center gap-1 group/item font-normal text-tagline-1 hover:text-secondary transition-all duration-200"
+            >
+              <span>Podpora</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="./kontakt.html"
+              class="text-secondary/60 dark:text-accent/60 dark:hover:text-accent flex items-center gap-1 group/item font-normal text-tagline-1 hover:text-secondary transition-all duration-200"
+            >
+              <span>Kontakt</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="./faq-page.html"
+              class="text-secondary/60 dark:text-accent/60 dark:hover:text-accent flex items-center gap-1 group/item font-normal text-tagline-1 hover:text-secondary transition-all duration-200"
+            >
+              <span>FAQ</span>
             </a>
           </li>
           <li>
@@ -366,9 +391,9 @@ Support Dropdown Menu
             </a>
           </li>
         </ul>
-        <div class="w-px h-full bg-secondary/10 dark:bg-accent/10"></div>
+        <div class="w-px h-full bg-secondary/10 dark:bg-accent/10 hidden"></div>
         <!-- Column 2 -->
-        <ul class="space-y-5 px-4">
+        <ul class="space-y-5 px-4 hidden">
           <li>
             <a
               href="./home-page-13.html"
@@ -667,9 +692,9 @@ Support Dropdown Menu
             </a>
           </li>
         </ul>
-        <div class="w-px h-full bg-secondary/10 dark:bg-accent/10"></div>
+        <div class="w-px h-full bg-secondary/10 dark:bg-accent/10 hidden"></div>
         <!-- Column 3 -->
-        <ul class="space-y-5 pl-4">
+        <ul class="space-y-5 pl-4 hidden">
           <li>
             <a
               href="./home-page-24.html"
@@ -1031,7 +1056,7 @@ Mega Menu V1
   ></div>
   <div
     id="pages-mega-menu"
-    class="mega-menu fixed left-1/2 -translate-x-1/2 top-full mt-2 pointer-events-none transition-all duration-300 opacity-0 bg-white rounded-[20px] z-50 max-w-[1290px] w-full shadow-1 border dark:border-background-5 border-stroke-4 overflow-hidden dark:bg-background-6 {=$mega-menu-color}"
+    class="mega-menu fixed left-1/2 -translate-x-1/2 top-full mt-2 pointer-events-none transition-all duration-300 opacity-0 bg-white rounded-[20px] z-50 max-w-[1290px] w-full shadow-1 border dark:border-background-5 border-stroke-4 overflow-hidden dark:bg-background-6 {=$mega-menu-color} hidden"
   >
     <div class="flex w-full relative">
       <div class="flex justify-between flex-1 gap-10 px-[60px] py-[70px]">
@@ -5413,7 +5438,7 @@ Footer v3
             </p>
             <ul class="space-y-5">
               <li>
-                <a href="./faq.html" class="footer-link-v2"> FAQ </a>
+                <a href="./faq-page.html" class="footer-link-v2"> FAQ </a>
               </li>
               <li>
                 <a href="./dokumentace.html" class="footer-link-v2"> Dokumentace </a>
@@ -5439,7 +5464,7 @@ Footer v3
                 <a href="./reklamace.html" class="footer-link-v2"> Reklamační řád </a>
               </li>
               <li>
-                <a href="./gdpr.html" class="footer-link-v2"> GDPR </a>
+                <a href="./gdpr-page.html" class="footer-link-v2"> GDPR </a>
               </li>
             </ul>
           </div>
@@ -5457,7 +5482,7 @@ Footer v3
         data-start="top 105%"
         class="text-secondary dark:text-accent/60"
       >
-        <span style="display: none;">Copyright &copy; Jakub Fischer</span>
+        Copyright &copy; Jakub Fischer
       </p>
     </div>
   </div>
